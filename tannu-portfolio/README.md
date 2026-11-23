@@ -144,4 +144,4 @@ The goal is not simply to showcase technologies, but to communicate how ideas ev
 
 **Designed and developed by Tannu Ranga.**
 
-*Built with curiosity, creativity, and code.*
+*Built with curiosity, creativity, and code.*# tannu-ranga-dev-portfolio
