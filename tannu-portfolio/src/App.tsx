@@ -537,7 +537,7 @@ function App() {
                 practical ideas into things people can actually use.
               </p>
               <p className="hero-sublead">This is my open notebook: what I've built, what I'm exploring, and what I'm learning along the way.</p>
-              <p className="hero-open-to"><span className="availability-dot" aria-hidden="true" /> Open to internships, jobs & collaborations</p>
+              
               <div className="hero-actions">
                 <a className="primary-link" href="#work">
                   Explore my work <ArrowDownRight size={23} aria-hidden="true" />
