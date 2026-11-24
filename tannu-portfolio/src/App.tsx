@@ -1,4 +1,4 @@
-import { useState, type PointerEvent } from "react";
+import { useEffect, useState, type PointerEvent } from "react";
 import { FaGithub, FaLinkedin, FaYoutube } from "react-icons/fa";
 import {
   AnimatePresence,
@@ -74,6 +74,57 @@ const projects: Project[] = [
     note: "A focused exercise in layout, hierarchy, and responsive design.",
   },
 ];
+
+/**
+ * Soft cursor: a tiny translucent accent around the native mouse pointer.
+ * Motion values update without rerendering the page on each mouse move.
+ * Disabled for touch input and reduced-motion preferences.
+ */
+function SoftCursor() {
+  const reducedMotion = useReducedMotion();
+  const pointerX = useMotionValue(-40);
+  const pointerY = useMotionValue(-40);
+  const smoothX = useSpring(pointerX, { stiffness: 900, damping: 50, mass: 0.18 });
+  const smoothY = useSpring(pointerY, { stiffness: 900, damping: 50, mass: 0.18 });
+  const [isVisible, setIsVisible] = useState(false);
+  const [isInteractive, setIsInteractive] = useState(false);
+
+  useEffect(() => {
+    const fineMouse = window.matchMedia("(hover: hover) and (pointer: fine)");
+    if (reducedMotion || !fineMouse.matches) return;
+
+    function updatePointer(event: globalThis.PointerEvent) {
+      if (event.pointerType !== "mouse") return;
+      pointerX.set(event.clientX);
+      pointerY.set(event.clientY);
+      setIsVisible(true);
+      const element = event.target instanceof Element ? event.target : null;
+      const overControl = Boolean(element?.closest("a, button, [role='button']"));
+      setIsInteractive(current => current === overControl ? current : overControl);
+    }
+
+    function hidePointer() { setIsVisible(false); }
+
+    document.addEventListener("pointermove", updatePointer, { passive: true });
+    document.documentElement.addEventListener("pointerleave", hidePointer);
+    window.addEventListener("blur", hidePointer);
+    return () => {
+      document.removeEventListener("pointermove", updatePointer);
+      document.documentElement.removeEventListener("pointerleave", hidePointer);
+      window.removeEventListener("blur", hidePointer);
+    };
+  }, [reducedMotion, pointerX, pointerY]);
+
+  return (
+    <motion.div
+      className={`cursor-trail ${isVisible ? "is-visible" : ""} ${isInteractive ? "is-over-target" : ""}`}
+      style={{ x: smoothX, y: smoothY }}
+      aria-hidden="true"
+    >
+      <span className="cursor-soft-ring" />
+    </motion.div>
+  );
+}
 
 function InteractiveSpecimen() {
   const reducedMotion = useReducedMotion();
@@ -283,11 +334,11 @@ function HackathonStory() {
     <section className="hackathon-section" id="hackathons" aria-labelledby="hackathon-title">
       <div className="section-shell hackathon-grid">
         <div className="hackathon-heading">
-          <p className="section-kicker">03 / BUILDING WITH OTHERS</p>
-          <h2 id="hackathon-title">Fast ideas.<br /><em>Real teamwork.</em></h2>
+          <p className="section-kicker">03 / HACKATHON EXPERIENCES</p>
+          <h2 id="hackathon-title">Fast ideas.<br /><em>Different paths.</em></h2>
           <p>
-            Hackathons are where I explore ideas with other developers,
-            collaborate under constraints, and turn concepts into prototypes.
+            I explore challenges both independently and in teams. Catalyst was
+            my individual entry; Dhaaga was built collaboratively.
           </p>
         </div>
         <article className="hackathon-ticket">
@@ -322,12 +373,14 @@ function Achievements() {
   const achievements = [
     {
       id: "01",
-      category: "HACKATHON / 15 NOV 2026",
-      headline: "Top 150",
-      organization: "Catalyst — Makers Need More (MnM)",
-      description: "Secured a Top 150 rank in Catalyst, the flagship online hackathon held on 15 November 2026.",
+      category: "INDIVIDUAL ENTRY / 15 NOV 2026",
+      headline: "Rank #100",
+      organization: "Catalyst Hackathon · Makers Need More",
+      description: "Solo participant · Position 100 in the Code Analysis ranking, with 93.14 marks.",
       link: "https://drive.google.com/drive/folders/1F4q716pvqAa53yidh71sZJMbBQ-wc3y5",
-      linkLabel: "View hackathon certificate & evidence",
+      linkLabel: "View certificate",
+      rankProof: "/achievements/catalyst-code-analysis-rank-100.webp",
+      rankProofLabel: "View ranking proof",
       accent: "coral",
       image: "/achievements/catalyst-top-150.webp",
       imageAlt: "Catalyst achievement certificate showing Tannu Ranga ranked in the Top 150 on 15 November 2026",
@@ -340,6 +393,8 @@ function Achievements() {
       description: "Completed all practice problems at the 500 difficulty level. This is a difficulty milestone, not a claim of a 500 contest rating.",
       link: "https://www.codechef.com/certificates/public/4b05962",
       linkLabel: "Verify CodeChef certificate",
+      rankProof: null,
+      rankProofLabel: null,
       accent: "lime",
       image: "/achievements/codechef-500-difficulty.webp",
       imageAlt: "CodeChef certificate for completion of the practice problems at 500 difficulty on 9 July 2026",
@@ -369,9 +424,16 @@ function Achievements() {
             <a className="achievement-image-link" href={achievement.link} target="_blank" rel="noopener noreferrer" aria-label={`Open proof for ${achievement.organization}`}>
               <img className="achievement-preview" src={achievement.image} alt={achievement.imageAlt} loading="lazy" decoding="async" width={1034} height={724} />
             </a>
-            <a href={achievement.link} target="_blank" rel="noopener noreferrer">
-              {achievement.linkLabel} <ArrowUpRight size={18} aria-hidden="true" />
-            </a>
+            <div className="achievement-proof-links">
+              {achievement.rankProof && (
+                <a href={achievement.rankProof} target="_blank" rel="noopener noreferrer" aria-label="View Tannu Ranga's Code Analysis ranking entry">
+                  {achievement.rankProofLabel} <ArrowUpRight size={18} aria-hidden="true" />
+                </a>
+              )}
+              <a href={achievement.link} target="_blank" rel="noopener noreferrer">
+                {achievement.linkLabel} <ArrowUpRight size={18} aria-hidden="true" />
+              </a>
+            </div>
           </article>
         ))}
       </div>
@@ -442,6 +504,7 @@ function App() {
     <MotionConfig reducedMotion="user">
       <div className="site-root">
         <a className="skip-link" href="#main">Skip to content</a>
+        <SoftCursor />
 
         <header className="site-header section-shell">
           <a className="wordmark" href="#top" aria-label="Tannu Ranga — back to top">

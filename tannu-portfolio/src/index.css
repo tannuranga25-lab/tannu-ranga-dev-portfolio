@@ -398,3 +398,71 @@ h1 em span { color: var(--coral); }
 @media (prefers-reduced-motion: reduce) {
   .resume-panel-actions a:hover, .resume-hero-link:hover { transform: none; }
 }
+
+/* V7 — Soft, natural pointer accent (native cursor stays visible). */
+.cursor-trail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  z-index: 1000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 130ms ease;
+}
+.cursor-trail.is-visible { opacity: 1; }
+.cursor-soft-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border: 1px solid rgba(116, 87, 255, .4);
+  background: rgba(116, 87, 255, .055);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 180ms ease, height 180ms ease,
+              background-color 180ms ease, border-color 180ms ease;
+}
+.cursor-trail.is-over-target .cursor-soft-ring {
+  width: 36px;
+  height: 36px;
+  border-color: rgba(116, 87, 255, .53);
+  background: rgba(116, 87, 255, .085);
+}
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .cursor-trail { display: none !important; }
+}
+
+/* Keep evidence links compact and readable on small screens. */
+.achievement-proof-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: auto;
+}
+.achievement-proof-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 16px;
+  background: var(--ink);
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 180ms ease, background-color 180ms ease;
+}
+.achievement-proof-links a:nth-child(2) {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid currentColor;
+}
+@media (hover: hover) and (pointer: fine) {
+  .achievement-proof-links a:hover { transform: translateY(-2px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .achievement-proof-links a:hover { transform: none; }
+}
