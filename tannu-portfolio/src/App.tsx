@@ -52,14 +52,14 @@ const projects: Project[] = [
   {
     id: "02",
     name: "Dhaaga",
-    type: "TEAM HACKATHON PROJECT",
+    type: "SOLO HACKATHON PROJECT",
     description:
-      "A collaborative care-circle project for older adults, family members, and caregivers, with shared care workflows and medication information.",
-    tools: ["Team project", "Next.js", "Care coordination"],
+      "My individual Catalyst hackathon project exploring shared care-circle coordination for older adults, families, and caregivers.",
+    tools: ["Solo entry", "Next.js", "Care coordination"],
     live: "https://dhaaga-promptwars-catalyst-hackathon.onrender.com/",
     github: "https://github.com/tannuranga25-lab/dhaaga-promptwars-catalyst-hackathon",
     theme: "lavender",
-    note: "Built collaboratively. Individual contributions will be detailed separately.",
+    note: "My Catalyst submission earned Position 100 in the Code Analysis ranking (93.14 marks).",
   },
   {
     id: "03",
@@ -337,8 +337,8 @@ function HackathonStory() {
           <p className="section-kicker">03 / HACKATHON EXPERIENCES</p>
           <h2 id="hackathon-title">Fast ideas.<br /><em>Different paths.</em></h2>
           <p>
-            I explore challenges both independently and in teams. Catalyst was
-            my individual entry; Dhaaga was built collaboratively.
+            I entered Catalyst Hackathon individually with Dhaaga, a care-circle
+            project. My submission placed 100th in the Code Analysis ranking.
           </p>
         </div>
         <article className="hackathon-ticket">
@@ -347,21 +347,21 @@ function HackathonStory() {
           <h3>Dhaaga<span>.</span></h3>
           <p className="ticket-subtitle">One thread, the whole family.</p>
           <p>
-            A collaborative care-circle project for older adults, families,
-            and caregivers. Created as a team hackathon project.
+            My individual hackathon project exploring shared care-circle
+            coordination for older adults, families, and caregivers.
           </p>
           <div className="ticket-tags">
-            <span>TEAM PROJECT</span><span>NEXT.JS</span><span>CARE COORDINATION</span>
+            <span>SOLO ENTRY</span><span>NEXT.JS</span><span>RANK #100</span>
           </div>
           <div className="ticket-links">
             <a href="https://dhaaga-promptwars-catalyst-hackathon.onrender.com/" target="_blank" rel="noopener noreferrer">
               View project <ArrowUpRight size={17} aria-hidden="true" />
             </a>
             <a href="https://github.com/tannuranga25-lab/dhaaga-promptwars-catalyst-hackathon" target="_blank" rel="noopener noreferrer">
-              Team repository <FaGithub size={17} aria-hidden="true" />
+              Source code <FaGithub size={17} aria-hidden="true" />
             </a>
           </div>
-          <p className="ticket-disclaimer">Team project; individual technical contributions are not claimed here.</p>
+          <p className="ticket-disclaimer">Catalyst Code Analysis · Position 100 · 93.14 marks</p>
         </article>
       </div>
     </section>
@@ -375,8 +375,8 @@ function Achievements() {
       id: "01",
       category: "INDIVIDUAL ENTRY / 15 NOV 2026",
       headline: "Rank #100",
-      organization: "Catalyst Hackathon · Makers Need More",
-      description: "Solo participant · Position 100 in the Code Analysis ranking, with 93.14 marks.",
+      organization: "Catalyst Hackathon · Dhaaga (Solo Entry)",
+      description: "Submitted Dhaaga individually and secured Position 100 in the Code Analysis ranking (93.14 marks).",
       link: "https://drive.google.com/drive/folders/1F4q716pvqAa53yidh71sZJMbBQ-wc3y5",
       linkLabel: "View certificate",
       rankProof: "/achievements/catalyst-code-analysis-rank-100.webp",
@@ -580,7 +580,7 @@ function App() {
                   <p>
                     I study full-stack development, practical AI integration, data
                     structures, and software engineering principles. I enjoy
-                    collaborative projects, hackathons, and building for real people.
+                    independent projects, hackathons, and building for real people.
                   </p>
                   <span className="about-flower" aria-hidden="true">✳</span>
                 </div>
