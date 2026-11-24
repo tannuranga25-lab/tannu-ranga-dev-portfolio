@@ -1,35 +1,27 @@
-The Living Fieldbook — V5 (V4 + Nature & Updatable Resume)
+THE LIVING FIELDBOOK — V7 (natural cursor + ranking evidence)
 
-Includes ALL V4 changes: achievements, uploaded certificate previews, leadership,
-contact email, YouTube, linked proofs, and Open to Internships / Jobs / Collaborations.
+CHANGES
+- Softer, smaller cursor halo: native pointer stays visible, no giant circle or labels.
+- Catalyst copy: individual entry, Position 100 in the Code Analysis ranking, 93.14 marks.
+- Authentic cropped proof of Tannu Ranga's ranking row (source: user-provided PDF page 5).
+- Existing Top 150 hackathon certificate stays available via its own link.
+- No other participants' ranking data included.
+- V6 projects, experience, contact, nature hobby, resume and achievements preserved.
 
-ADDED IN V5:
-- Hobby: Spending time in nature
-- Download resume CTA in hero and contact footer
-- View PDF fallback in contact footer
-- Resume links use the same Google Drive file ID supplied by user
+INSTALL
+1. Download ZIP into ~/Downloads.
+2. cd ~/Desktop/Portfolio/tannu-portfolio
+3. cp src/App.tsx src/App.tsx.before-v7
+4. cp src/index.css src/index.css.before-v7
+5. unzip -o ~/Downloads/the-living-fieldbook-v7-natural-cursor.zip -d .
+6. npm run build && npm run lint
+7. npm run dev
 
-DOWNLOAD LINK BEHAVIOUR:
-Google Drive can sometimes open a preview or confirmation instead of starting a direct
-download. Visitors can then click Download. The View PDF fallback always opens the
-Drive viewer subject to sharing permissions.
+GITHUB & VERCEL (ONLY after local checks pass)
+ git add src/App.tsx src/index.css public/achievements/catalyst-code-analysis-rank-100.webp
+ git commit -m "refine: soften cursor and document Catalyst Code Analysis ranking"
+ git push
 
-UPDATE RESUME WITHOUT EDITING PORTFOLIO:
-1. Open the SAME resume file in Google Drive.
-2. File information → Manage versions → Upload new version.
-3. Select the updated PDF. Do NOT create a separate new Drive file or replace the ID.
-4. Test both portfolio links in an incognito browser.
-5. Share → General access → Anyone with the link → Viewer.
-6. Make sure viewers are permitted to download.
-7. Before making public, inspect your resume for any personal phone number or private data.
-
-INSTALL: From ~/Desktop/Portfolio/tannu-portfolio
-  cp src/App.tsx src/App.tsx.before-v5
-  cp src/index.css src/index.css.before-v5
-  unzip -o ~/Downloads/the-living-fieldbook-v5-nature-resume.zip -d .
-  npm run build
-  npm run lint
-  npm run dev
-
-Requires existing installed dependencies: motion, lucide-react, react-icons.
-No new packages required.
+Accuracy note: ranking source titled "Latest Code Analysis - Ranking"
+shows Tannu Ranga at position 100 with marks 93.14; the
+separate achievement certificate says Top 150 in Catalyst.
